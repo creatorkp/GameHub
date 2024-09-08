@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import axios from "axios";
 import { CanceledError } from "axios";
+import { Spinner } from "@chakra-ui/react";
 
 export interface Platform {
   id: number;
@@ -27,21 +28,23 @@ const useGames = () => {
 
   const [errors, setErrors] = useState(" ");
 
+  const [isloading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const controller = new AbortController();
+    setIsLoading(true);
     apiClient
       .get<FetchGamesResponse>("/games", { signal: controller.signal })
-      .then((res) => setGames(res.data.results))
-      .catch((err) =>
-        err instanceof CanceledError
-          ? console.log("cancelled", err)
-          : (console.log("error", err), setErrors(err.response.data))
-      );
+      .then((res) => (setGames(res.data.results), setIsLoading(false)))
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setErrors(err.response.data), setIsLoading(false);
+      });
 
     return () => controller.abort();
   }, []);
 
-  return { games, errors };
+  return { games, errors, isloading };
 };
 
 export default useGames;
