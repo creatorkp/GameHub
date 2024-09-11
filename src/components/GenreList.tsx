@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import useGenres, { Genre } from "../hooks/useGenres";
 import CropImage from "./CropImage";
-import { error } from "console";
+import { Platform } from "../hooks/useGames";
 
 interface Prop {
   onClick: (genre: Genre) => void;
