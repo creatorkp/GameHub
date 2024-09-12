@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { HStack, Show } from "@chakra-ui/react";
+import { Box, HStack, Show } from "@chakra-ui/react";
 import { Grid, GridItem } from "@chakra-ui/react";
 import NavBar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
@@ -46,21 +46,23 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <HStack spacing={5} paddingLeft={2} marginBottom={2}>
+        <Box paddingLeft={2}>
           <GameHeading gameQuery={gameQuery} />
-          <PlatormSelector
-            onSelectPlatForm={(platform) =>
-              SetGameQuery({ ...gameQuery, platform })
-            }
-            selectedPlatform={gameQuery.platform}
-          />
-          <SortSelector
-            sortOrder={gameQuery.sortOrder}
-            onSelectSortOrder={(sortOrder) =>
-              SetGameQuery({ ...gameQuery, sortOrder })
-            }
-          />
-        </HStack>
+          <HStack spacing={5} marginBottom={2}>
+            <PlatormSelector
+              onSelectPlatForm={(platform) =>
+                SetGameQuery({ ...gameQuery, platform })
+              }
+              selectedPlatform={gameQuery.platform}
+            />
+            <SortSelector
+              sortOrder={gameQuery.sortOrder}
+              onSelectSortOrder={(sortOrder) =>
+                SetGameQuery({ ...gameQuery, sortOrder })
+              }
+            />
+          </HStack>
+        </Box>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
