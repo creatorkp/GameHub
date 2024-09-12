@@ -9,6 +9,7 @@ import { Genre } from "./hooks/useGenres";
 import PlatormSelector from "./components/PlatormSelector";
 import { Platform } from "./hooks/useGames";
 import SortSelector from "./components/SortSelector";
+import GameHeading from "./components/GameHeading";
 
 export interface GameQuery {
   genre: Genre;
@@ -46,6 +47,7 @@ function App() {
       </Show>
       <GridItem area="main">
         <HStack spacing={5} paddingLeft={2} marginBottom={2}>
+          <GameHeading gameQuery={gameQuery} />
           <PlatormSelector
             onSelectPlatForm={(platform) =>
               SetGameQuery({ ...gameQuery, platform })
