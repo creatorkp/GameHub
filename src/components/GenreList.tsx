@@ -5,6 +5,7 @@ import {
   ListItem,
   Spinner,
   Button,
+  Heading,
 } from "@chakra-ui/react";
 import useGenres, { Genre } from "../hooks/useGenres";
 import CropImage from "./CropImage";
@@ -22,6 +23,9 @@ const GenreList = ({ onClick, selectedGenre }: Prop) => {
   if (isloading) return <Spinner />;
   return (
     <>
+      <Heading fontSize="2xl" marginY={4}>
+        Genre
+      </Heading>
       <List>
         {data.map((catog) => (
           <ListItem key={catog.id} padding="5px">
@@ -32,6 +36,8 @@ const GenreList = ({ onClick, selectedGenre }: Prop) => {
                 src={CropImage(catog.image_background)}
               ></Image>
               <Button
+                whiteSpace="Normal"
+                textAlign="left"
                 variant="link"
                 fontSize="lg"
                 onClick={() => onClick(catog)}

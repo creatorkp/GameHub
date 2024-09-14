@@ -1,3 +1,4 @@
+import noImage from "../assets/OIP.svg";
 function CropImage(imageURL: string) {
   if (!imageURL) return;
   const splitOn = "media/";
